@@ -1,0 +1,56 @@
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.page-size-selector label {
+  margin-right: 0.5rem;
+  font-weight: 500;
+}
+
+.page-size-selector select {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.page-navigation button {
+  min-width: 100px;
+  margin: 0 0.25rem;
+}
+
+.page-navigation span {
+  font-weight: 600;
+}
+
+/* Flex container for heading and icon */
+.th-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+ 
+/* Sort icon base */
+.sort-icon {
+  width: 0;
+  height: 0;
+  margin-left: 8px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  transition: transform 0.2s ease;
+}
+ 
+/* Ascending sort */
+th.sort-asc .sort-icon {
+  border-top: 6px solid #ffffff;
+  border-bottom: none;
+}
+
+
+/* Descending sort */
+th.sort-desc .sort-icon {
+  border-bottom: 6px solid #ffffff;
+  border-top: none;
+}

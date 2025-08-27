@@ -1,0 +1,8 @@
+variables:
+  app_type: 'static-web-apps'
+  project_name: 'Test' 
+  app_location: '/browser'
+  dev_resourceName: Test-dev'
+  continue_on_snyk_error: true #Do not Update. For DevOps usage
+  snyk_severity_threshold: 'high' #Do not Update. For DevOps usage
+  continue_on_coverage_threshold: true 

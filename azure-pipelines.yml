@@ -1,0 +1,47 @@
+trigger:
+  branches:
+    include:
+      - develop
+      - releases/release*
+  paths:
+    exclude:
+      - "*.yml"
+      - "*.yaml"
+
+variables:
+  - group: PipelineType
+  - template: '.azuredevops/variables.yml'
+  - name: reason
+    ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+      value: pr
+    ${{ elseif eq(variables['Build.Reason'], 'Manual') }}:
+      value: manual
+    ${{ elseif eq(variables['Build.Reason'], 'IndividualCI') }}:
+      value: code_merge
+    ${{ else }}:
+      value: other
+
+name: $(reason)_$(Date:yyyyMMdd).$(Rev:r)
+
+resources:
+  repositories:
+    - repository: common-pipelines
+      type: git
+      name: 'Test'
+      ref: 'feature/201142_static_web_app_hs'
+
+pool:
+  vmImage: 'windows-latest'
+
+stages:
+- template: ${{ variables.app_type }}/ci-template.yml@common-pipelines
+  parameters:
+    template_parameters: '${{ variables }}'
+
+- template: ${{ variables.app_type }}/rollback-template.yml@common-pipelines
+  parameters:
+    template_parameters: '${{ variables }}'
+
+- template: ${{ variables.app_type }}/cd-template.yml@common-pipelines
+  parameters:
+    template_parameters: '${{ variables }}'

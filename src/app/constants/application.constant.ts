@@ -1,0 +1,1 @@
+export const API_RESPONSE_TYPE = 'application/json';
